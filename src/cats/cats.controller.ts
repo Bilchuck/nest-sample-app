@@ -1,8 +1,9 @@
 import { Controller, Get, Post, Req, Body, Put, Query, Param } from "@nestjs/common";
 import CatsService from "./cats.service";
 import ICat from "./ICat";
-import ICreateCatDTO from "./dto/create-cat.dto";
+import CreateCatDTO from "./dto/create-cat.dto";
 import { identity } from "rxjs";
+import ValidationPipe from "../pipes/validation.pipe";
 
 @Controller('cats')
 export class CatsController {
@@ -17,12 +18,12 @@ export class CatsController {
   }
 
   @Post()
-  async createCat(@Body() catDTO: ICreateCatDTO) {
+  async createCat(@Body(new ValidationPipe()) catDTO: CreateCatDTO) {
     await this.catsService.createCat(catDTO)
   }
 
   @Put(':id')
-  async editCat(@Param('id') id: string, @Body() catDTO: ICreateCatDTO) {
+  async editCat(@Param('id') id: string, @Body() catDTO: CreateCatDTO) {
     await this.catsService.editCat(id, catDTO)
   }
 }

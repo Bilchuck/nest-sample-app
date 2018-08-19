@@ -1,3 +1,6 @@
-export default interface ICreateCatDTO {
-  name: string
+import { IsString } from "class-validator";
+
+export default class CreateCatDTO {
+  @IsString()
+  readonly name: string
 }
