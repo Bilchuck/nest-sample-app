@@ -1,6 +1,5 @@
-import { ICreateCatDTO } from 'dto/create-cat.dto';
-import ICat from 'ICat'
-import ICreateCatDTO from 'dto/create-cat.dto';
+import ICat from './ICat'
+import ICreateCatDTO from './dto/create-cat.dto';
 
 export default class CatsService {
   private readonly cats: ICat[] = []

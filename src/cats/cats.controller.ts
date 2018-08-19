@@ -1,8 +1,8 @@
 import { Controller, Get, Post, Req, Body, Put, Query, Param } from "@nestjs/common";
-import CatsService from "cats.service";
-import ICat from "ICat";
-import ICreateCatDTO from "dto/create-cat.dto";
-import { identity } from "../node_modules/rxjs";
+import CatsService from "./cats.service";
+import ICat from "./ICat";
+import ICreateCatDTO from "./dto/create-cat.dto";
+import { identity } from "rxjs";
 
 @Controller('cats')
 export class CatsController {
