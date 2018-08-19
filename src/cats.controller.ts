@@ -1,25 +1,28 @@
-import { Controller, Get, Post, Req, Body } from "@nestjs/common";
+import { Controller, Get, Post, Req, Body, Put, Query, Param } from "@nestjs/common";
+import CatsService from "cats.service";
+import ICat from "ICat";
+import ICreateCatDTO from "dto/create-cat.dto";
+import { identity } from "../node_modules/rxjs";
 
 @Controller('cats')
 export class CatsController {
   cats = [1,2,3,4]
-  constructor() {
+  constructor(private readonly catsService: CatsService) {
 
   }
 
   @Get()
-  getCats() {
-    return this.cats
+  async getCats(): Promise<ICat[]> {
+    return this.catsService.findAll()
   }
 
   @Post()
-  async addCat(@Body('cat') newCat: number) {
-    await (new Promise(resolve => {
-      setTimeout(_ => {
-        this.cats.push(newCat)
-        resolve()
-      }, 1000)
-    }))
-    return true
+  async createCat(@Body() catDTO: ICreateCatDTO) {
+    await this.catsService.createCat(catDTO)
+  }
+
+  @Put(':id')
+  async editCat(@Param('id') id: string, @Body() catDTO: ICreateCatDTO) {
+    await this.catsService.editCat(id, catDTO)
   }
 }
