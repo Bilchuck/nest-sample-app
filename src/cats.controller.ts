@@ -13,7 +13,7 @@ export class CatsController {
   }
 
   @Post()
-  async addCat(@Body('cat') newCat) {
+  async addCat(@Body('cat') newCat: number) {
     await (new Promise(resolve => {
       setTimeout(_ => {
         this.cats.push(newCat)
